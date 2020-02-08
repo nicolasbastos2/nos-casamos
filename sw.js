@@ -1,7 +1,9 @@
-// This is the service worker with the Cache-first network
+const PRECACHE = 'precache-v1';
+const RUNTIME = 'runtime';
 
-const CACHE = "pwabuilder-precache";
-const precacheFiles = ['nicolasbastos.github.io/kathe-y-juank/styles/styles.css',
+// A list of local resources we always want to be cached.
+const PRECACHE_URLS = [
+  'nicolasbastos.github.io/kathe-y-juank/styles/styles.css',
 'nicolasbastos.github.io/kathe-y-juank/script/main.js',
 'nicolasbastos.github.io/kathe-y-juank/common-css/bootstrap.css',
 'nicolasbastos.github.io/kathe-y-juank/common-css/fluidbox.min.css',
@@ -21,79 +23,50 @@ const precacheFiles = ['nicolasbastos.github.io/kathe-y-juank/styles/styles.css'
 'nicolasbastos.github.io/kathe-y-juank/images'
 ];
 
-self.addEventListener("install", function (event) {
-  console.log("[PWA Builder] Install Event processing");
-
-  console.log("[PWA Builder] Skip waiting on install");
-  self.skipWaiting();
-
+// The install handler takes care of precaching the resources we always need.
+self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE).then(function (cache) {
-      console.log("[PWA Builder] Caching pages during install");
-      return cache.addAll(precacheFiles);
-    })
+    caches.open(PRECACHE)
+      .then(cache => cache.addAll(PRECACHE_URLS))
+      .then(self.skipWaiting())
   );
 });
 
-// Allow sw to control of current page
-self.addEventListener("activate", function (event) {
-  console.log("[PWA Builder] Claiming clients for current page");
-  event.waitUntil(self.clients.claim());
+// The activate handler takes care of cleaning up old caches.
+self.addEventListener('activate', event => {
+  const currentCaches = [PRECACHE, RUNTIME];
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return cacheNames.filter(cacheName => !currentCaches.includes(cacheName));
+    }).then(cachesToDelete => {
+      return Promise.all(cachesToDelete.map(cacheToDelete => {
+        return caches.delete(cacheToDelete);
+      }));
+    }).then(() => self.clients.claim())
+  );
 });
 
-// If any fetch fails, it will look for the request in the cache and serve it from there first
-self.addEventListener("fetch", function (event) { 
-  if (event.request.method !== "GET") return;
+// The fetch handler serves responses for same-origin resources from a cache.
+// If no response is found, it populates the runtime cache with the response
+// from the network before returning it to the page.
+self.addEventListener('fetch', event => {
+  // Skip cross-origin requests, like those for Google Analytics.
+  if (event.request.url.startsWith(self.location.origin)) {
+    event.respondWith(
+      caches.match(event.request).then(cachedResponse => {
+        if (cachedResponse) {
+          return cachedResponse;
+        }
 
-  event.respondWith(
-    fromCache(event.request).then(
-      function (response) {
-        // The response was found in the cache so we responde with it and update the entry
-
-        // This is where we call the server to get the newest version of the
-        // file to use the next time we show view
-        event.waitUntil(
-          fetch(event.request).then(function (response) {
-            return updateCache(event.request, response);
-          })
-        );
-
-        return response;
-      },
-      function () {
-        // The response was not found in the cache so we look for it on the server
-        return fetch(event.request)
-          .then(function (response) {
-            // If request was success, add or update it in the cache
-            event.waitUntil(updateCache(event.request, response.clone()));
-
-            return response;
-          })
-          .catch(function (error) {
-            console.log("[PWA Builder] Network request failed and no cache." + error);
+        return caches.open(RUNTIME).then(cache => {
+          return fetch(event.request).then(response => {
+            // Put a copy of the response in the runtime cache.
+            return cache.put(event.request, response.clone()).then(() => {
+              return response;
+            });
           });
-      }
-    )
-  );
+        });
+      })
+    );
+  }
 });
-
-function fromCache(request) {
-  // Check to see if you have it in the cache
-  // Return response
-  // If not in the cache, then return
-  return caches.open(CACHE).then(function (cache) {
-    return cache.match(request).then(function (matching) {
-      if (!matching || matching.status === 404) {
-        return Promise.reject("no-match");
-      }
-
-      return matching;
-    });
-  });
-}
-
-function updateCache(request, response) {
-  return caches.open(CACHE).then(function (cache) {
-    return cache.put(request, response);
-  });
-}
