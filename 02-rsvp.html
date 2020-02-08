@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Juan& Kathe</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	
+	
+	<!-- Font -->
+	
+	<link href="https://fonts.googleapis.com/css?family=Playball%7CBitter" rel="stylesheet">
+	
+	<!-- Stylesheets -->
+	
+	<link href="common-css/bootstrap.css" rel="stylesheet">
+	
+	<link href="common-css/font-icon.css" rel="stylesheet">
+	
+	
+	<link href="02-rsvp/css/styles.css" rel="stylesheet">
+	
+	<link href="02-rsvp/css/responsive.css" rel="stylesheet">
+	
+</head>
+<body>
+	
+	<header>
+		
+		<div id="navbar"class="container">
+		
+			<a class="logo" href="#"><img src="images/logo.png" alt="Logo"></a>
+			
+			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="icon icon-bars"></i></div>
+			
+			<ul class="main-menu visible-on-click" id="main-menu">
+			  <li><a href="index.html">INICIO</a></li>
+			  <li><a href="#!">NUESTRA HISTORIA</a></li>
+				<li><a href="#!">LA BODA</a></li>
+				<li><a href="#!">GALERIA</a></li>
+			  <li><a href="02-rsvp.html">CONFIRMA TU ASISTENCIA</a></li>
+			</ul>
+			<!-- main-menu -->
+			
+		</div><!-- container -->
+	</header>
+	
+	
+	<div class="main-slider">
+		<div class="display-table center-text">
+			<div class="display-table-cell">
+				<div class="slider-content">
+				  <h3 class="pre-title">Confirma Tu Asistencia</h3>
+				  <h1 class="title">Eres Nuestro Invitado</h1>
+				</div><!-- slider-content-->
+			</div><!--display-table-cell-->
+		</div><!-- display-table-->
+	</div><!-- main-slider -->
+	
+	
+	<section class="section contact-area">
+		<div class="container">
+			<div class="row">
+			  <!-- col-sm-6 -->
+			  <div class="col-sm-12 col-md-8 col-lg-6 col-xl-12">
+			    <div class="contact-form margin-bottom">
+			      <h2 class="center-text">Vas a Asistir?</h2>
+			      <h4 class="pre-title center-text">Confirma Aqui!!</h4>
+			      <form method="post">
+			        <div class="row">
+			          <div class="col-sm-12 margin-bottom">
+			            <label>Nombre completo</label>
+			            <input class="name-input" type="text" >
+		              </div>
+			          <div class="col-sm-12 margin-bottom">
+			            <label>Email</label>
+			            <input class="email-input" type="text" >
+		              </div>
+			          <div class="col-sm-6 margin-bottom">
+			            <label>Invitados</label>
+			            <select class="event-select" name="option">
+			              <option value="1"><span>00</span></option>
+			              <option value="2">01</option>
+			              <option value="3">02</option>
+			              <option value="3">03</option>
+			              <option value="3">04</option>
+		                </select>
+		              </div>
+			          <div class="col-sm-6 margin-bottom">
+			            <label>Dieta Especial</label>
+			            <select class="event-select" name="option">
+			              <option value="1">Ninguna</option>
+			              <option value="3">Alergia Al Gluten</option>
+			              <option value="3">Alergia a los Frutos Secos(mani,almendras etc)</option>
+			              <option value="3">Lacteos</option>
+		                </select>
+		              </div>
+			          <div class="col-sm-12 center-text">
+			            <button class="btn"><strong>Voy a Asistir</strong></button>
+		              </div>
+		            </div>
+			        <!-- row -->
+		          </form>
+		        </div>
+			    <!-- contact-form -->
+		      </div>
+			  <!-- col-sm-6 -->
+		  </div>
+<!-- row -->
+		</div><!-- container -->
+	</section><!-- section -->
+	
+	<div class="map-area">
+		<div id="map" style="height:100%;"></div>
+	</div><!-- map-area -->
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-oEyU88bRR6xcbV1gI_Cahc8ugKC_JPE&callback=initMap"></script> <!-- SCIPTS -->
+	
+	<script src="common-js/jquery-3.1.1.min.js"></script>
+	
+	<script src="common-js/tether.min.js"></script>
+	
+	<script src="common-js/bootstrap.js"></script>
+	
+	<script src="common-js/scripts.js"></script>
+	
+</body>
+</html>
