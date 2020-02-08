@@ -18,8 +18,7 @@ const precacheFiles = ['nicolasbastos.github.io/kathe-y-juank/styles/styles.css'
 'nicolasbastos.github.io/kathe-y-juank/common-js/jquery.fluidbox.min.js',
 'nicolasbastos.github.io/kathe-y-juank/common-js/scripts.js',
 'nicolasbastos.github.io/kathe-y-juank/sw.js',
-'nicolasbastos.github.io/kathe-y-juank/images',
-  /* Add an array of files to precache for your app */
+'nicolasbastos.github.io/kathe-y-juank/images'
 ];
 
 self.addEventListener("install", function (event) {
