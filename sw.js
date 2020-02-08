@@ -3,24 +3,24 @@ const RUNTIME = 'runtime';
 
 // A list of local resources we always want to be cached.
 const PRECACHE_URLS = [
-  'nicolasbastos.github.io/kathe-y-juank/styles/styles.css',
-'nicolasbastos.github.io/kathe-y-juank/script/main.js',
-'nicolasbastos.github.io/kathe-y-juank/common-css/bootstrap.css',
-'nicolasbastos.github.io/kathe-y-juank/common-css/fluidbox.min.css',
-'nicolasbastos.github.io/kathe-y-juank/common-css/font-icon.css',
-'nicolasbastos.github.io/kathe-y-juank/01-homepage/css/styles.css',
-'nicolasbastos.github.io/kathe-y-juank/01-homepage/css/responsive.css',
-'nicolasbastos.github.io/kathe-y-juank/manifest.json',
+  '/styles/styles.css',
+'/script/main.js',
+'/common-css/bootstrap.css',
+'/common-css/fluidbox.min.css',
+'/common-css/font-icon.css',
+'/01-homepage/css/styles.css',
+'/01-homepage/css/responsive.css',
+'/manifest.json',
 'https://fonts.googleapis.com/css?family=Playball%7CBitter',
-'nicolasbastos.github.io/kathe-y-juank/common-js/jquery-3.1.1.min.js',
-'nicolasbastos.github.io/kathe-y-juank/common-js/tether.min.js',
-'nicolasbastos.github.io/kathe-y-juank/index.html',
-'nicolasbastos.github.io/kathe-y-juank/common-js/bootstrap.js',
-'nicolasbastos.github.io/kathe-y-juank/common-js/jquery.countdown.min.js',
-'nicolasbastos.github.io/kathe-y-juank/common-js/jquery.fluidbox.min.js',
-'nicolasbastos.github.io/kathe-y-juank/common-js/scripts.js',
-'nicolasbastos.github.io/kathe-y-juank/sw.js',
-'nicolasbastos.github.io/kathe-y-juank/images'
+'/common-js/jquery-3.1.1.min.js',
+'/common-js/tether.min.js',
+'/index.html',
+'/common-js/bootstrap.js',
+'/common-js/jquery.countdown.min.js',
+'/common-js/jquery.fluidbox.min.js',
+'/common-js/scripts.js',
+'/sw.js',
+'/images'
 ];
 
 // The install handler takes care of precaching the resources we always need.
